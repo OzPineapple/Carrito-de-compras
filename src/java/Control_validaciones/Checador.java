@@ -27,15 +27,17 @@ public class Checador {
     //</editor-fold>
     
     //<editor-fold desc="Metodos publicos">
-    public boolean usuario(String var){
-        if(this.estaMalLongitud(var, 2, 15))return false;
-        if(this.noEsAlfabetico(var))return false;
-        return true;
+    public boolean usuario(String usuario){
+        if(this.estaMalLongitud(usuario, 2, 15))return true;
+        if(this.noEsAlfabetico(usuario))return true;
+        this.mensaje = "valido";
+        return false;
     }
-    public boolean contraseña(String var){
-        if(this.estaMalLongitud(var, 8, 30)) return false;
-        if(this.noEsAlfanumerico(var)) return false;
-        return true;
+    public boolean contraseña(String contraseña){
+        if(this.estaMalLongitud(contraseña, 8, 30)) return true;
+        if(this.noEsAlfanumerico(contraseña)) return true;
+        this.mensaje = "valido";
+        return false;
     }
     //</editor-fold>
     
