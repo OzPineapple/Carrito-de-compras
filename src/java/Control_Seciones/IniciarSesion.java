@@ -1,10 +1,9 @@
-package Control_Seciones;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Control_Seciones;
 
 import Control_validaciones.Checador;
 import java.io.IOException;
@@ -18,21 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Alumno
  */
-public class IniciarSecion extends HttpServlet {
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
-
-    /**
+public class IniciarSesion extends HttpServlet {
+/**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -43,11 +29,16 @@ public class IniciarSecion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario =  request.getParameter("usuario");
-        String contraseña = request.getParameter("contra");
-
+        String usuario = null;
+        String contraseña = null;
+        try{
+            usuario =  request.getParameter("usuario");
+            contraseña = request.getParameter("contra");
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
         Checador validar =  new Checador();
-
+        
         try (PrintWriter out = response.getWriter()) {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
