@@ -5,31 +5,25 @@ import java.util.regex.Matcher;
 
 /**
  * Clase para validar campos web.
- * El modo de uso es simple.
- * <li>
- *  <ol>Instanciar al objeto
- *  <br>
- *  <code>
- *      Checador validar = new Checador();
- *  </code>
- *  </ol>
- *  <ol>Llamar a un metodo para determinar si la cadema es correcta o no y usa el mensaje de error
- *  <br>
- *  <code>
- *      if(validar.usuario(//Valiable a validar){
+ * <p>El modo de uso es simple.
+ * <ol>
+ *   <li>Instanciar al objeto
+ *  
+ *      <pre>Checador validar = new Checador();</pre>
+ *  
+ *  <li>Llamar a un metodo para determinar si la cadema es correcta o no y usa el mensaje de error
+ *      <pre>if(validar.usuario(//Valiable a validar){
  *             //Codigo de validacion erronea
  *             validar.getMensaje();
  *             //Codigo de mensaja de error (opcional)
- *      }
- *  </code>
- *  </ol>
- * <br>
- * La clase usa REGEX para validar.
- * <br>
- * Cada validacion almacena un valor dentro 
+ *      }</pre>
+ * </ol>
+ * <p>La clase usa REGEX para validar.
+ * 
+ * <p>Cada validacion almacena un valor dentro 
  * de {@link Checador#mensaje Mensaje} que puede se consultado en
  * {@link Checador#getMensaje() getMensaje()}
- * <br>
+ * 
  * @see <a href="https://es.wikipedia.org/wiki/Expresi%C3%B3n_regular"> REGEX</a>
  * @author Zush18
  * @version 2.5
@@ -55,44 +49,51 @@ public class Checador {
     //<editor-fold desc="REGEX">
     //Apoyos
     /**
-     * Variable para vocales en regex<br>
+     * Variable para vocales en regex
      * ÁÉÚÍÓáéúíóÄËÏÜÖäëüïö
      */
     private String vocalesEspañol = "ÁÉÚÍÓáéúíóÄËÏÜÖäëüïö";
     //MATCH
     /**
-     * Regx para determinar si es un numero entero<br>
+     * <p>Regx para determinar si es un numero entero
+     * 
      * [\\d]+
      */
     private String numInt = "[\\d]+";
     /**
-     * Regx para determinar si es un numero decimal<br>
+     * <p>Regx para determinar si es un numero decimal
+     * 
      * [0-9]+([\\.][0-9]+)?
      */
     private String numFloat = "[0-9]+([\\.][0-9]+)?";
     /**
-     * Regx para determinar si es alfanumerico<br>
+     * <p>Regx para determinar si es alfanumerico
+     * 
      * [\\w{@link Checador#vocalesEspañol Vocales latinas}\s]+
      */
     private String alfanumerico = "[\\w"+this.vocalesEspañol+"\\s]+";
     /**
-     * Regx para determinar si es alfabetico<br>
+     * <p>Regx para determinar si es alfabetico
+     * 
      * [A-Za-z{@link Checador#vocalesEspañol} Vocales latinas}\s]+
      */
     private String alfabeto = "[A-Za-z"+this.vocalesEspañol+"\\s]+";
     /**
-     * Regx para determinar si es un correo electronico valido<br>
+     * <p>Regx para determinar si es un correo electronico valido
+     * 
      * ({@link Checador#alfanumerico Alfanumerico}\\.?)+\\@({@link Checador#alfanumerico Alfanumerico}\\.?)+\\.{@link Checador#alfanumerico Alfanumerico}
      */
     private String correo = "("+alfanumerico+"\\.?)+\\@("+alfanumerico+"\\.?)+\\."+alfanumerico+"";
     //FIND
     /**
-     * Regex para encontrar que la caden no este vacia<br>
+     * <p>Regex para encontrar que la caden no este vacia
+     * 
      * [^\\t\\r\\n\\f\\v\\s]
      */
     private String vacio = "[^\\t\\r\\n\\f\\v\\s]";
     /**
-     * Regex´para encontrar que la cadena tenga comillas<br>
+     * <p>Regex´para encontrar que la cadena tenga comillas
+     * 
      * [\\\"']
      */
     private String comillas = "[\\\"']";
@@ -100,10 +101,10 @@ public class Checador {
     
     //<editor-fold desc="Metodos publicos">
     /**
-     * Valida que un nombre de usuario sea correcto en todos los sentidos.
-     * <br>
-     * Si se quiere obtener el error usar {@link Checador#getMensaje() getMensaje()}
-     * <br>
+     * <p>Valida que un nombre de usuario sea correcto en todos los sentidos.
+     * 
+     * <p>Si se quiere obtener el error usar {@link Checador#getMensaje() getMensaje()}
+     * 
      * Ver los metodos privados para saber como se valida
      * @param usuario campo a validar
      * @return booleano
@@ -117,10 +118,10 @@ public class Checador {
     }
     
     /**
-     * Valida que una contraseña sea correcto en todos los sentidos.
-     * <br>
-     * Si se quiere obtener el error usar {@link Checador#getMensaje() getMensaje()}
-     * <br>
+     * <p>Valida que una contraseña sea correcto en todos los sentidos.
+     * 
+     * <p>Si se quiere obtener el error usar {@link Checador#getMensaje() getMensaje()}
+     * 
      * Ver los metodos privados para saber como se valida
      * @param contraseña campo a validar
      * @return booleano
@@ -137,7 +138,8 @@ public class Checador {
     //<editor-fold desc="Metodos privados">
     
     /**
-     * Valida si no es una cadena alfanumerica<br>
+     * <p>Valida si no es una cadena alfanumerica
+     * 
      * {@link Checador#alfanumerico REGEX}
      * @param var Cadena a validar
      * @return boleano
@@ -151,7 +153,8 @@ public class Checador {
     }
     
     /**
-     * Valida que no sea un correo electronico<br>
+     * <p>Valida que no sea un correo electronico
+     * 
      * {@link Checador#correo REGEX}
      * @param var Cadena a validar
      * @return booleano
@@ -166,7 +169,8 @@ public class Checador {
     }
     
     /**
-     * Valida que la cadena tenga comillas<br>
+     * <p>Valida que la cadena tenga comillas
+     * 
      * {@link Checador#comillas REGEX}
      * @param var
      * @return booleano
@@ -181,7 +185,8 @@ public class Checador {
     }
     
     /**
-     * Valida que la cadena este vacia<br>
+     * <p>Valida que la cadena este vacia
+     * 
      * {@link Checador#vacio REGEX}
      * @param var
      * @return booleano
@@ -199,7 +204,8 @@ public class Checador {
     }
     
     /**
-     * Valida que la longitud de una cadena no sea erronea<br>
+     * <p>Valida que la longitud de una cadena no sea erronea
+     * 
      * @param var
      * @param min
      * @param max
@@ -219,8 +225,9 @@ public class Checador {
     }
     
     /**
-     * Valida que no sea un numero entero<br>
-     * {Qlink Checador#numInt REGEX}
+     * <p>Valida que no sea un numero entero
+     * 
+     * {@link Checador#numInt REGEX}
      * @param var
      * @return booleano
      * @see Checador#RegexMatch(java.lang.String, java.lang.String) 
@@ -234,7 +241,8 @@ public class Checador {
     }
     
     /**
-     * Valida que no sea un numero decimal<br>
+     * <p>Valida que no sea un numero decimal
+     * 
      * {@link Checador#numFloat REGEX}
      * @param var
      * @return booleano
@@ -249,7 +257,8 @@ public class Checador {
     }
     
     /**
-     * Valida que no sea alfabetico<br>
+     * <p>Valida que no sea alfabetico
+     * 
      * {@link Checador#alfabeto REGEX}
      * @param var
      * @return booleano
