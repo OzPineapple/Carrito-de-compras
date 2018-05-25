@@ -15,11 +15,15 @@ public class ControlUsuarios extends Conector{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void eleminarUsuario(){
+    public void eleminarUsuario(int id){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void actulizarUsuario(){
+    public void actulizarUsuario(int id){
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }    
+
+    public void getUsuario(int id){
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }    
 }

@@ -5,7 +5,8 @@ USE TiendaDeepWeb;
 CREATE TABLE Usuario(
     id_usu int not null auto_increment,
     Nombre varchar(15) not null,
-    Contraseña varchar(15) not null,
+    Contraseña varchar(30) not null,
+    Rango int not null,
     PRIMARY KEY(id_usu)
 );
 
