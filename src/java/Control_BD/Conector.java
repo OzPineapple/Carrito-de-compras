@@ -15,39 +15,39 @@ import java.sql.ResultSet;
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
  * @author Zush18
  */
-abstract class Conector {
+public class Conector {
     //<editor-fold desc="Constantes">
     /**
      * <p>Usa esta constanta para indicar que el dato es un:
      * <b>String</b>
      */
-    final static int DataString = 0;
+    final protected static int DataString = 0;
     /**
      * <p>Usa esta constanta para indicar que el dato es un:
      * <b>Int</b>
      */
-    final static int DataInt = 1;
+    final protected static int DataInt = 1;
     /**
      * <p>Usa esta constanta para indicar que el dato es un:
      * <b>Double</b>
      */
-    final static int DataDouble = 2;
+    final protected static int DataDouble = 2;
     /**
      * <p>Usa esta constanta para indicar que el dato es un:
      * <b>Float</b>
      */
-    final static int DataFloat = 3;
+    final protected static int DataFloat = 3;
     /**
      * <p>Usa esta constanta para indicar que el dato es un:
      * <b>Date</b>
      */
-    final static int DataDate = 4;
+    final protected static int DataDate = 4;
     //</editor-fold>
     //<editor-fold desc="Credenciales">
     /**
      * Usuario de la base de datos
      */
-    String username = "root";
+    String username = "CajeroDeepWeb";
     /**
      * Contrasaña para conectar
      */
@@ -80,15 +80,10 @@ abstract class Conector {
      * @return Connection Objeto de conexion MYSQL 
      */
     private Connection getConnection(){
-        
-        Connection con=null;
-        
+        Connection con = null;
         try{
             Class.forName(driver);
-            url="jdbc:mysql://localhost/proyecto";
             con=DriverManager.getConnection(url, username, password);
-            
-            System.out.println("Si se conecto a la BD");
         }catch(Exception e){
             this.printErr(e);
         }
@@ -100,11 +95,9 @@ abstract class Conector {
      * @param sql
      * @return ResultSet Resultado
      */
-    protected ResultSet Query(String sql){
+    protected ResultSet Query(String sql, String[] datos, int[] dataType){
         try(Connection con = this.getConnection();
             PreparedStatement ps=con.prepareStatement(sql)){
-            String[] datos = this.getDatos();
-            int[] dataType = this.getDataType();
             for (int i = 0; i < datos.length; i++) {
                 switch(dataType[i]){
                     case DataString:
@@ -136,11 +129,9 @@ abstract class Conector {
      * @param sql
      * @return 
      */
-    protected int Update(String sql){
+    protected int Update(String sql, String[] datos, int[] dataType){
         try(Connection con = this.getConnection();
             PreparedStatement ps=con.prepareStatement(sql)){
-            String[] datos = this.getDatos();
-            int[] dataType = this.getDataType();
             for (int i = 0; i < datos.length; i++) {
                 switch(dataType[i]){
                     case DataString:
@@ -166,31 +157,6 @@ abstract class Conector {
             return -1;
         }
     }
-        
-    /**
-     * Dentro de este metodo devuelve tus datos en un array, idependientemente 
-     * de que tipo de datos sean debes convertirlos a String
-     * @return 
-     */
-    abstract String[] getDatos();
-    
-    /**
-     * <p>En este metodo devuelve que tipo de datos son, usando 
-     * como indicador las constantes de la interfaz:
-     * <ul>
-     *      <li>{@link ObtnerDatos#StringData}
-     *      <li>{@link ObtnerDatos#IntData}
-     *      <li>{@link ObtnerDatos#DoubleData}
-     *      <li>{@link ObtnerDatos#FloatData}
-     *      <li>{@link ObtnerDatos#DateData}
-     * </ul>
-     * <p>por ejemplo
-     * <pre>//Dentro de getDtatos en el String[0] colocaste un int
-     *      int[0] = IntDate;
-     * </pre>
-     * @return 
-     */
-    abstract int[] getDataType();
     //</editor-fold>    
 
 }
