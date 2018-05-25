@@ -6,6 +6,7 @@
 package Control_BD;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +15,34 @@ import java.sql.ResultSet;
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
  * @author Zush18
  */
-public class Conector {
+abstract class Conector {
+    //<editor-fold desc="Constantes">
+    /**
+     * <p>Usa esta constanta para indicar que el dato es un:
+     * <b>String</b>
+     */
+    final static int DataString = 0;
+    /**
+     * <p>Usa esta constanta para indicar que el dato es un:
+     * <b>Int</b>
+     */
+    final static int DataInt = 1;
+    /**
+     * <p>Usa esta constanta para indicar que el dato es un:
+     * <b>Double</b>
+     */
+    final static int DataDouble = 2;
+    /**
+     * <p>Usa esta constanta para indicar que el dato es un:
+     * <b>Float</b>
+     */
+    final static int DataFloat = 3;
+    /**
+     * <p>Usa esta constanta para indicar que el dato es un:
+     * <b>Date</b>
+     */
+    final static int DataDate = 4;
+    //</editor-fold>
     //<editor-fold desc="Credenciales">
     /**
      * Usuario de la base de datos
@@ -66,13 +94,41 @@ public class Conector {
         }
         return con;
     }
+    
     /**
      * Hace una consulta a la base de datos atravez de una sentencia SQL
      * @param sql
      * @return ResultSet Resultado
      */
-    private ResultSet Query(String sql){
-        throw new UnsupportedOperationException("Sin base de datos para poder programar este codigo"); 
+    protected ResultSet Query(String sql){
+        try(Connection con = this.getConnection();
+            PreparedStatement ps=con.prepareStatement(sql)){
+            String[] datos = this.getDatos();
+            int[] dataType = this.getDataType();
+            for (int i = 0; i < datos.length; i++) {
+                switch(dataType[i]){
+                    case DataString:
+                        ps.setString(i, datos[i]);
+                    break;
+                    case DataInt:
+                        ps.setInt(i, Integer.parseInt(datos[i]));
+                    break;
+                    case DataDouble:
+                        ps.setDouble(i, Double.parseDouble(datos[i]));
+                    break;
+                    case DataFloat:
+                        ps.setFloat(i, Float.parseFloat(datos[i]));
+                    break;
+                    case DataDate:
+                        ps.setDate(i, Date.valueOf(datos[i]));
+                    break;
+                }
+            }
+            return ps.executeQuery();
+        }catch(Exception e){
+            this.printErr(e);
+            return null;
+        }
     }
     /**
      * Actuliza  la base de datos atrvez de una base de datos a travez de una
@@ -80,10 +136,61 @@ public class Conector {
      * @param sql
      * @return 
      */
-    private int Update(String sql){
-        throw new UnsupportedOperationException("Sin base de datos para poder programar este codigo"); 
+    protected int Update(String sql){
+        try(Connection con = this.getConnection();
+            PreparedStatement ps=con.prepareStatement(sql)){
+            String[] datos = this.getDatos();
+            int[] dataType = this.getDataType();
+            for (int i = 0; i < datos.length; i++) {
+                switch(dataType[i]){
+                    case DataString:
+                        ps.setString(i, datos[i]);
+                    break;
+                    case DataInt:
+                        ps.setInt(i, Integer.parseInt(datos[i]));
+                    break;
+                    case DataDouble:
+                        ps.setDouble(i, Double.parseDouble(datos[i]));
+                    break;
+                    case DataFloat:
+                        ps.setFloat(i, Float.parseFloat(datos[i]));
+                    break;
+                    case DataDate:
+                        ps.setDate(i, Date.valueOf(datos[i]));
+                    break;
+                }
+            }
+            return ps.executeUpdate();
+        }catch(Exception e){
+            this.printErr(e);
+            return -1;
+        }
     }
-    //</editor-fold>
+        
+    /**
+     * Dentro de este metodo devuelve tus datos en un array, idependientemente 
+     * de que tipo de datos sean debes convertirlos a String
+     * @return 
+     */
+    abstract String[] getDatos();
     
-    
+    /**
+     * <p>En este metodo devuelve que tipo de datos son, usando 
+     * como indicador las constantes de la interfaz:
+     * <ul>
+     *      <li>{@link ObtnerDatos#StringData}
+     *      <li>{@link ObtnerDatos#IntData}
+     *      <li>{@link ObtnerDatos#DoubleData}
+     *      <li>{@link ObtnerDatos#FloatData}
+     *      <li>{@link ObtnerDatos#DateData}
+     * </ul>
+     * <p>por ejemplo
+     * <pre>//Dentro de getDtatos en el String[0] colocaste un int
+     *      int[0] = IntDate;
+     * </pre>
+     * @return 
+     */
+    abstract int[] getDataType();
+    //</editor-fold>    
+
 }
