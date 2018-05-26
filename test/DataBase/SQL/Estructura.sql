@@ -46,3 +46,7 @@ CREATE TABLE M_DT(
     FOREIGN KEY(id_Dtick) REFERENCES DetalleTick(id_Dtick)
     ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+CREATE USER "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
+
+GRANT CALL ON TiendaDeepWeb.* TO "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';

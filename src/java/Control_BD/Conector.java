@@ -15,34 +15,8 @@ import java.sql.ResultSet;
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
  * @author Zush18
  */
-public class Conector {
-    //<editor-fold desc="Constantes">
-    /**
-     * <p>Usa esta constanta para indicar que el dato es un:
-     * <b>String</b>
-     */
-    final protected static int DataString = 0;
-    /**
-     * <p>Usa esta constanta para indicar que el dato es un:
-     * <b>Int</b>
-     */
-    final protected static int DataInt = 1;
-    /**
-     * <p>Usa esta constanta para indicar que el dato es un:
-     * <b>Double</b>
-     */
-    final protected static int DataDouble = 2;
-    /**
-     * <p>Usa esta constanta para indicar que el dato es un:
-     * <b>Float</b>
-     */
-    final protected static int DataFloat = 3;
-    /**
-     * <p>Usa esta constanta para indicar que el dato es un:
-     * <b>Date</b>
-     */
-    final protected static int DataDate = 4;
-    //</editor-fold>
+public class Conector implements DataType{
+
     //<editor-fold desc="Credenciales">
     /**
      * Usuario de la base de datos
@@ -51,11 +25,11 @@ public class Conector {
     /**
      * Contrasaña para conectar
      */
-    String password = "n0m3l0";
+    String password = "d33pw33b";
     /**
      * Ruta de la base de datos
      */
-    String url = "jdbc:mysql:3306//localhost/proyecto";
+    String url = "jdbc:mysql:3306//localhost/TiendaDeepWeb";
     /**
      * Driver de MYSQL para conectar
      */
