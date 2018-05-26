@@ -5,17 +5,16 @@
  */
 package Control_BD;
 
+import Entidades.Usuario;
+
 /**
  *
  * @author Zush18
  */
 public class ControlUsuarios extends Conector{
     
-    public void agregarUsuario(String nombre, String contraseña, int rango){
-        String[] datos = new String[3];
-        int[] dataType = new int[3];
-        
-        this.Update("CALL añadirUsuario(?,?,?)", datos, dataType);
+    public void agregarUsuario(Usuario usu, int rango){
+        this.Update("CALL añadirUsuario(?,?,?)", usu.getNewData(), usu.getAlldataType());
     }
     
     public void eleminarUsuario(int id){
