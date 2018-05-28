@@ -28,6 +28,11 @@ public class Usuario implements Control_BD.DataType{
         this.contraseña = contraseña;
         this.rango = rango;
     }
+
+    public Usuario(String nombre, String contraseña) {
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+    }
     
     //</editor-fold>
     

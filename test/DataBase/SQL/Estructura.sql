@@ -1,11 +1,13 @@
-CREATE DATABASE  IF NOT EXISTS `TiendaDeepWeb`;
+DROP DATABASE IF EXISTS TiendaDeepWeb;
+
+CREATE DATABASE IF NOT EXISTS TiendaDeepWeb CHARACTER=utf8mb4; 
 
 USE TiendaDeepWeb;
 
 CREATE TABLE Usuario(
     id_usu int not null auto_increment,
     Nombre varchar(30) not null,
-    Contraseña varchar(30) not null,
+    Contrasena varchar(30) not null,
     Rango int not null,
     PRIMARY KEY(id_usu)
 );
@@ -13,7 +15,7 @@ CREATE TABLE Usuario(
 CREATE TABLE Producto(
     id_pro int not null auto_increment,
     Nombre varchar(15) not null,
-    Descripción text,
+    Descripcion text,
     Precio float(15,2),
     PRIMARY KEY(id_pro)
 );
@@ -30,11 +32,11 @@ CREATE TABLE DetalleTicket (
   Cantidad int NOT NULL,
   id_tick int NOT NULL,
   PRIMARY KEY (id_Dtick),
-  KEY id_item (id_item),
-  KEY id_ticket (id_ticket),
-  FOREIGN KEY (id_pro) REFERENCES Producto (id_pro) ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (id_tick) REFERENCES Ticket (id_tick) ON DELETE CASCADE ON UPDATE CASCADE
-)
+  FOREIGN KEY (id_pro) REFERENCES Producto(id_pro)
+  ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_tick) REFERENCES Ticket(id_tick) 
+  ON DELETE CASCADE ON UPDATE CASCADE
+);
 
 CREATE TABLE M_DT(
     id_MDT int not null auto_increment,
@@ -43,10 +45,10 @@ CREATE TABLE M_DT(
     PRIMARY KEY(id_MDT),
     FOREIGN KEY(id_tick) REFERENCES Ticket(id_tick)
     ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(id_Dtick) REFERENCES DetalleTick(id_Dtick)
+    FOREIGN KEY(id_Dtick) REFERENCES DetalleTicket(id_Dtick)
     ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE USER "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
 
-GRANT CALL ON TiendaDeepWeb.* TO "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
+GRANT SELECT, DELETE, UPDATE, INSERT ON TiendaDeepWeb.* TO "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
