@@ -30,7 +30,7 @@ public class Conector implements DataType{
     /**
      * Ruta de la base de datos
      */
-    String url = "jdbc:mysql:3306//localhost/TiendaDeepWeb";
+    String url = "jdbc:mysql://localhost:3306/TiendaDeepWeb";
     /**
      * Driver de MYSQL para conectar
      */

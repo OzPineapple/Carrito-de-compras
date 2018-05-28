@@ -1,6 +1,6 @@
 DROP DATABASE IF EXISTS TiendaDeepWeb;
 
-CREATE DATABASE IF NOT EXISTS TiendaDeepWeb CHARACTER=utf8mb4; 
+CREATE DATABASE IF NOT EXISTS TiendaDeepWeb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; 
 
 USE TiendaDeepWeb;
 
@@ -48,6 +48,8 @@ CREATE TABLE M_DT(
     FOREIGN KEY(id_Dtick) REFERENCES DetalleTicket(id_Dtick)
     ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+DROP USER IF EXISTS "CajeroDeepWeb"@"localhost";
 
 CREATE USER "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
 

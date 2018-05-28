@@ -38,7 +38,7 @@ public class Usuario implements Control_BD.DataType{
     
     //<editor-fold desc="Metedos de datos">
     public String[] getAllData(){
-        datos = new String[3];
+        datos = new String[4];
         datos[0] = String.valueOf(this.id);
         datos[1] = this.nombre; 
         datos[2] = this.contraseña; 
@@ -46,7 +46,7 @@ public class Usuario implements Control_BD.DataType{
         return datos;
     }
     public int[] getAlldataType(){
-        dataType = new int[3];
+        dataType = new int[4];
         dataType[0] = DataInt;
         dataType[1] = DataString;
         dataType[2] = DataString;
@@ -57,7 +57,10 @@ public class Usuario implements Control_BD.DataType{
         datos = new String[3];
         datos[0] = nombre; 
         datos[1] = contraseña; 
-        datos[2] = String.valueOf(rango); 
+        datos[2] = String.valueOf(rango);
+        for(String see : datos){
+            System.out.println(see);
+        }
         return datos;
     }
     public int[] getNewdataType(){

@@ -16,7 +16,7 @@ import java.sql.SQLException;
 public class ControlUsuarios extends Conector{
     
     public int agregarUsuario(Usuario usu, int rango){
-        return this.Update("CALL añadirUsuario(?,?,?)", usu.getNewData(), usu.getAlldataType());
+        return this.Update("CALL anadirUsuario(?,?,?)", usu.getNewData(), usu.getAlldataType());
     }
     
     public int eleminarUsuario(Usuario usu){

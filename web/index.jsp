@@ -52,13 +52,13 @@
                     <label>Nombre:</label>
                     <input type="text" title="Solo caracteres alfanumericos" 
                         minlength="2" maxlength="15" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                        name="usuario" required>
+                        name="usuarioIn" required>
                 </div>
                 <div class="six columns">
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
                             minlength="8" maxlength="30" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                            name="contra" required>
+                            name="contraIn" required>
                 </div>
             </div>
             <br>
@@ -75,13 +75,13 @@
                     <label>Nombre:</label>
                     <input type="text" title="Solo caracteres alfanumericos" 
                         minlength="2" maxlength="15" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                        name="usuario" required>
+                        name="usuarioNew" required>
                 </div>
                 <div class="six columns">
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
                             minlength="8" maxlength="30" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                            name="contra" required>
+                            name="contraNew" required>
                 </div>
             </div>
             <br>
