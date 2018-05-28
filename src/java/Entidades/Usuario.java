@@ -62,6 +62,57 @@ public class Usuario implements Control_BD.DataType{
         dataType[2] = DataInt;
         return dataType;
     }
+    public String[] getJustData(String data){
+        String[] Data = new String[1];
+        switch(data){
+            case "id":
+                Data[0] = String.valueOf(this.id);
+            break;
+            case "nombre":
+                Data[0] = this.nombre;
+            break;
+            case "contraseña":
+                Data[0] = this.contraseña;
+            break;
+            case "rango":
+                Data[0] = String.valueOf(this.rango);
+            break;
+        }
+        return Data;
+    }
+    public int[] getJustDataType(String data) throws RuntimeException{
+        int[] Data = new int[1];
+        switch(data){
+            case "id":
+                Data[0] = DataInt;
+            break;
+            case "nombre":
+                Data[0] = DataString;
+            break;
+            case "contraseña":
+                Data[0] = DataString;
+            break;
+            case "rango":
+                Data[0] = DataInt;
+            break;
+            default:
+                throw new RuntimeException("Atributo "+data+" no existe");
+        }
+        return Data;
+    }
+    public String[] getSesionData(){
+        String[] data = new String[2];
+        data[0] = this.nombre;
+        data[1] = this.contraseña;
+        return data;
+    }
+    public int[] getSesionDataType(){
+        int[] data = new int[2];
+        data[0] = DataInt;
+        data[1] = DataInt;
+        return data;
+    }
+    
     //</editor-fold>
     
     

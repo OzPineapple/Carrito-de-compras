@@ -1,10 +1,10 @@
-CREATE DATABASE IF EXISTS TiendaDeepWeb; 
+CREATE DATABASE  IF NOT EXISTS `TiendaDeepWeb`;
 
 USE TiendaDeepWeb;
 
 CREATE TABLE Usuario(
     id_usu int not null auto_increment,
-    Nombre varchar(15) not null,
+    Nombre varchar(30) not null,
     Contraseña varchar(30) not null,
     Rango int not null,
     PRIMARY KEY(id_usu)
@@ -13,7 +13,7 @@ CREATE TABLE Usuario(
 CREATE TABLE Producto(
     id_pro int not null auto_increment,
     Nombre varchar(15) not null,
-    Descripción text, 
+    Descripción text,
     Precio float(15,2),
     PRIMARY KEY(id_pro)
 );
@@ -24,17 +24,17 @@ CREATE TABLE Ticket(
     ip varchar(15),
     PRIMARY KEY(id_tick)
 );
-
-CREATE TABLE DetalleTicket(
-    id_Dtick int not null auto_increment,
-    id_usu int not null,
-    id_pro int not null,
-    PRIMARY KEY(id_Dtick),
-    FOREIGN KEY(id_usu) REFERENCES Usuario(id_usu)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY(id_pro) REFERENCES Producto(id_pro)
-    ON DELETE CASCADE ON UPDATE CASCADE
-);
+CREATE TABLE DetalleTicket (
+  id_Dtick int NOT NULL AUTO_INCREMENT,
+  id_pro int NOT NULL,
+  Cantidad int NOT NULL,
+  id_tick int NOT NULL,
+  PRIMARY KEY (id_Dtick),
+  KEY id_item (id_item),
+  KEY id_ticket (id_ticket),
+  FOREIGN KEY (id_pro) REFERENCES Producto (id_pro) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_tick) REFERENCES Ticket (id_tick) ON DELETE CASCADE ON UPDATE CASCADE
+)
 
 CREATE TABLE M_DT(
     id_MDT int not null auto_increment,

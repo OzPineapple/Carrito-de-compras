@@ -1,3 +1,4 @@
+
 DROP PROCEDURE IF EXISTS añadirUsuario;
 
 CREATE PROCEDURE añadirUsuario(IN nom varchar(15), IN contra varchar(30), IN ran int)
@@ -17,11 +18,11 @@ DROP PROCEDURE IF EXISTS eliminarUsuario;
 CREATE PROCEDURE eleminarUsuario(IN id int)
     BEGIN
         DELETE Usuario WHERE id=id_usu;
-    END 
+    END
 
 DROP PROCEDURE IF EXISTS getUsuario;
 
-CREATE PROCEDURE getUsuario(IN nom varchar(15), IN contra varchar(30), OUT @id int, OUT @nom varchar(30), OUT @contra varchar(15), OUT @ran int)
+CREATE PROCEDURE getUsuarioSesion(IN nom varchar(15), IN contra varchar(30), OUT @id int, OUT @nom varchar(30), OUT @contra varchar(15), OUT @ran int)
     BEGIN
         DECLARE contraBD varchar(30) = SELECT Contraseña FROM Usuario WHERE nom=Nombre;
         IF contraBD == contra
@@ -29,7 +30,7 @@ CREATE PROCEDURE getUsuario(IN nom varchar(15), IN contra varchar(30), OUT @id i
             @nom = SELECT Nombre FROM Usuario WHERE @id=id_usu;
             @contra = SELECT Contraseña FROM Usuario WHERE @id=id_usu;
             @ran = SELECT Rango FROM Usuario WHERE @id=id_usu;
-        ELSE 
+        ELSE
             @id = 0;
             @nom = "null";
             @contra = "null";
@@ -37,3 +38,7 @@ CREATE PROCEDURE getUsuario(IN nom varchar(15), IN contra varchar(30), OUT @id i
         END IF
     END
 
+CREATE PROCEDURE getAllUsuario()
+    BEGIN
+        SELECT * FROM Usuario;
+    END

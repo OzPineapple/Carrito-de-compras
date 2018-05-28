@@ -10,6 +10,7 @@ import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
@@ -72,25 +73,7 @@ public class Conector implements DataType{
     protected ResultSet Query(String sql, String[] datos, int[] dataType){
         try(Connection con = this.getConnection();
             PreparedStatement ps=con.prepareStatement(sql)){
-            for (int i = 0; i < datos.length; i++) {
-                switch(dataType[i]){
-                    case DataString:
-                        ps.setString(i, datos[i]);
-                    break;
-                    case DataInt:
-                        ps.setInt(i, Integer.parseInt(datos[i]));
-                    break;
-                    case DataDouble:
-                        ps.setDouble(i, Double.parseDouble(datos[i]));
-                    break;
-                    case DataFloat:
-                        ps.setFloat(i, Float.parseFloat(datos[i]));
-                    break;
-                    case DataDate:
-                        ps.setDate(i, Date.valueOf(datos[i]));
-                    break;
-                }
-            }
+            this.insertData(ps, datos, dataType);
             return ps.executeQuery();
         }catch(Exception e){
             this.printErr(e);
@@ -106,31 +89,42 @@ public class Conector implements DataType{
     protected int Update(String sql, String[] datos, int[] dataType){
         try(Connection con = this.getConnection();
             PreparedStatement ps=con.prepareStatement(sql)){
-            for (int i = 0; i < datos.length; i++) {
-                switch(dataType[i]){
-                    case DataString:
-                        ps.setString(i, datos[i]);
-                    break;
-                    case DataInt:
-                        ps.setInt(i, Integer.parseInt(datos[i]));
-                    break;
-                    case DataDouble:
-                        ps.setDouble(i, Double.parseDouble(datos[i]));
-                    break;
-                    case DataFloat:
-                        ps.setFloat(i, Float.parseFloat(datos[i]));
-                    break;
-                    case DataDate:
-                        ps.setDate(i, Date.valueOf(datos[i]));
-                    break;
-                }
-            }
+            this.insertData(ps, datos, dataType);
             return ps.executeUpdate();
         }catch(Exception e){
             this.printErr(e);
             return -1;
         }
     }
+    /**
+     * Inserta los datos en el PS para ahorrar lineas
+     * @param ps
+     * @param datos
+     * @param dataType
+     * @throws SQLException 
+     */
+    private void insertData(PreparedStatement ps, String[] datos, int[] dataType) throws SQLException{
+        for (int i = 0; i < datos.length; i++) {
+            switch(dataType[i]){
+                case DataString:
+                    ps.setString(i, datos[i]);
+                break;
+                case DataInt:
+                    ps.setInt(i, Integer.parseInt(datos[i]));
+                break;
+                case DataDouble:
+                    ps.setDouble(i, Double.parseDouble(datos[i]));
+                break;
+                case DataFloat:
+                    ps.setFloat(i, Float.parseFloat(datos[i]));
+                break;
+                case DataDate:
+                    ps.setDate(i, Date.valueOf(datos[i]));
+                break;
+            }
+        }
+    }
     //</editor-fold>    
 
 }
+
