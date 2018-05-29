@@ -33,7 +33,7 @@ public class IniciarSesion extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         String usuario = null;
         String contraseña = null;
         try{
@@ -45,26 +45,18 @@ public class IniciarSesion extends HttpServlet {
         Checador validar =  new Checador();
         ControlUsuarios cu = new ControlUsuarios();
         Usuario usu = new Usuario(usuario, contraseña);
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link href=\"//fonts.googleapis.com/css?family=Raleway:400,300,600\" rel=\"stylesheet\" type=\"text/css\">\n<link rel=\"stylesheet\" href=\"css/normalize.css\">\n<link rel=\"stylesheet\" href=\"css/skeleton.css\"><title>DeepWeb</title></head><body>");  
-            if(validar.usuario(usuario)){
-                out.println("<h1>Usuario "+validar.getMensaje()+"</h1>");
-            }
-            if(validar.contraseña(contraseña)){
-                out.println("<h1>Contraseña "+validar.getMensaje()+"</h1>");
-            }
-            if(!validar.usuario(usuario) && !validar.contraseña(contraseña)){
-                out.println("<h1>Campos validos</h1>");
-            }
-            try {
-                cu.getUsuarioSesion(usu);
-            } catch (SQLException | RuntimeException ex) {
-                out.println(ex.getMessage());
-            }
-            out.println("</body>");
-            out.println("</html>");
-
+        if(validar.usuario(usuario)){
+            response.sendError(401, "Usuario "+validar.getMensaje());
         }
+        if(validar.contraseña(contraseña)){
+            response.sendError(401,"Contraseña "+validar.getMensaje());
+        }
+        try {
+            usu = cu.getUsuarioSesion(usu);
+        } catch (SQLException | RuntimeException ex) {
+            response.sendError(502, "MYSQL error revisar consola");
+        }
+
 
     }
 }

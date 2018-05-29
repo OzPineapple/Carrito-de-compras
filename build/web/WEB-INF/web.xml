@@ -16,6 +16,18 @@
         <servlet-name>Registrar</servlet-name>
         <url-pattern>/Registrar</url-pattern>
     </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/err/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/err/401.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>502</error-code>
+        <location>/err/502.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30

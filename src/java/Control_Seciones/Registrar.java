@@ -62,23 +62,19 @@ public class Registrar extends HttpServlet {
                 System.out.println("Error "+e.getMessage());
             }
             if(validar.usuario(nom)){
-                out.println("<h1>Usuario "+validar.getMensaje()+"</h1>");
+                response.sendError(401, "Usuario "+validar.getMensaje());
             }
             if(validar.contraseña(contra)){
-                out.println("<h1>Contraseña "+validar.getMensaje()+"</h1>");
-            }
-            if(validar.usuario(nom) && validar.contraseña(contra)){
-                int status = 400;
-                request.setAttribute("status", status);
-                response.sendRedirect("Error.jsp");
+                response.sendError(401, "Contraseña "+validar.getMensaje());
             }
             if (!validar.usuario(nom) && !validar.contraseña(contra)) {
                 Usuario usu = new Usuario(nom, contra);
                 int agregarUsuario = cu.agregarUsuario(usu, 0);
                 if(agregarUsuario > 0){
-                    out.println("<h1>Agragado correctamente</h1>");
+                    response.setStatus(201, "Agregado");
+                    response.sendRedirect("/public/201.jsp");
                 }else{
-                    out.println("<h1>No agregado</h1>");
+                    response.sendError(502, "No Agregado");
                 }
             }
         }
