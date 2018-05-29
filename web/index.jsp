@@ -51,14 +51,14 @@
                 <div class="six columns">
                     <label>Nombre:</label>
                     <input type="text" title="Solo caracteres alfanumericos" 
-                        minlength="2" maxlength="15" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                        name="usuarioIn" required>
+                        minlength="2" maxlength="15" name="usuarioIn" required
+                        pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
                 <div class="six columns">
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
-                            minlength="8" maxlength="30" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                            name="contraIn" required>
+                            minlength="8" maxlength="30" name="contraIn" required
+                            pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
             </div>
             <br>
@@ -74,14 +74,14 @@
                 <div class="six columns">
                     <label>Nombre:</label>
                     <input type="text" title="Solo caracteres alfanumericos" 
-                        minlength="2" maxlength="15" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                        name="usuarioNew" required>
+                        minlength="2" maxlength="15" name="usuarioNew" required
+                        pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
                 <div class="six columns">
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
-                            minlength="8" maxlength="30" pattern=/[\wÁÉÚÍÓáéúíóÄËÏÜÖäëüïö ]+/
-                            name="contraNew" required>
+                            minlength="8" maxlength="30" name="contraNew" required
+                            pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
             </div>
             <br>

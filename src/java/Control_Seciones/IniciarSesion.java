@@ -9,10 +9,7 @@ import Control_BD.ControlUsuarios;
 import Control_validaciones.Checador;
 import Entidades.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -37,8 +34,8 @@ public class IniciarSesion extends HttpServlet {
         String usuario = null;
         String contraseña = null;
         try{
-            usuario =  request.getParameter("usuario");
-            contraseña = request.getParameter("contra");
+            usuario =  request.getParameter("usuarioIn");
+            contraseña = request.getParameter("contraIn");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
@@ -46,17 +43,29 @@ public class IniciarSesion extends HttpServlet {
         ControlUsuarios cu = new ControlUsuarios();
         Usuario usu = new Usuario(usuario, contraseña);
         if(validar.usuario(usuario)){
-            response.sendError(401, "Usuario "+validar.getMensaje());
+            request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
         }
         if(validar.contraseña(contraseña)){
-            response.sendError(401,"Contraseña "+validar.getMensaje());
+            request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
         }
+        
         try {
             usu = cu.getUsuarioSesion(usu);
-        } catch (SQLException | RuntimeException ex) {
-            response.sendError(502, "MYSQL error revisar consola");
+        } catch (SQLException e) {
+            response.sendError(502, "MYSQL error revisar consola "+e.getMessage());
+            return;
+        } catch(RuntimeException e){
+            System.out.println(e.getMessage());
+            request.setAttribute("Mensaje", e.getMessage());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
         }
-
+        request.setAttribute("Mensaje", "Todo ok"+usu.getNombre()+usu.getContraseña());
+        request.getRequestDispatcher("public/200.jsp").forward(request, response);
 
     }
 }

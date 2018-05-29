@@ -21,19 +21,12 @@
                 overflow-y: hidden;
                 overflow-x: hidden;
             }
-            img{
-                width: 10rem;
-            }
         </style>
     </head>
     <body>
         <h1>
-            201
+            <b>201</b> <%= request.getAttribute("Mensaje") %>
         </h1>
-        <br>
-        <h2>
-            Creado
-        </h2>
         <br>
         <img src="img/201.gif">
         <br>

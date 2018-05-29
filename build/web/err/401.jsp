@@ -14,6 +14,9 @@
         <link rel="stylesheet" href="css/skeleton.css">
         <title>401</title>
         <style>
+            *{
+                margin: auto;
+            }
             body{
                 background: #ff6666;
                 color: white;
@@ -21,19 +24,16 @@
                 overflow-y: hidden;
                 overflow-x: hidden;
             }
-            img{
-                width: 10rem;
-            }
         </style>
     </head>
     <body>
         <h1>
-            401
+            <b>401</b> ¡Ey! ¿Que intentas hacer?
         </h1>
         <br>
-        <h2>
-            ¡Ey! ¿Que intentas hacer?
-        </h2>
+        <h3>
+            <%= (String) request.getAttribute("Mensaje") %>
+        </h3>
         <br>
         <img src="img/401.gif">
         <br>

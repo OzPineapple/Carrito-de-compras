@@ -53,4 +53,7 @@ DROP USER IF EXISTS "CajeroDeepWeb"@"localhost";
 
 CREATE USER "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
 
-GRANT SELECT, DELETE, UPDATE, INSERT ON TiendaDeepWeb.* TO "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
+GRANT EXECUTE, SELECT ON TiendaDeepWeb.* TO "CajeroDeepWeb"@"localhost" IDENTIFIED BY 'd33pw33b';
+
+    
+ 

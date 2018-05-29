@@ -49,8 +49,6 @@ public class Registrar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try(PrintWriter out = response.getWriter()){
-            out.println("<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link href=\"//fonts.googleapis.com/css?family=Raleway:400,300,600\" rel=\"stylesheet\" type=\"text/css\">\n<link rel=\"stylesheet\" href=\"css/normalize.css\">\n<link rel=\"stylesheet\" href=\"css/skeleton.css\"><title>DeepWeb</title></head><body>");  
             Checador validar = new Checador();
             ControlUsuarios cu = new ControlUsuarios();
             String nom = null;
@@ -62,22 +60,30 @@ public class Registrar extends HttpServlet {
                 System.out.println("Error "+e.getMessage());
             }
             if(validar.usuario(nom)){
-                response.sendError(401, "Usuario "+validar.getMensaje());
+                request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+                request.getRequestDispatcher("err/401.jsp").forward(request, response);
+                return;
             }
             if(validar.contraseña(contra)){
-                response.sendError(401, "Contraseña "+validar.getMensaje());
+                request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+                request.getRequestDispatcher("err/401.jsp").forward(request, response);
+                return;
             }
-            if (!validar.usuario(nom) && !validar.contraseña(contra)) {
-                Usuario usu = new Usuario(nom, contra);
-                int agregarUsuario = cu.agregarUsuario(usu, 0);
-                if(agregarUsuario > 0){
-                    response.setStatus(201, "Agregado");
-                    response.sendRedirect("/public/201.jsp");
-                }else{
-                    response.sendError(502, "No Agregado");
-                }
+            Usuario usu = new Usuario(nom, contra);
+            int agregarUsuario = 0;
+            try{
+                agregarUsuario = cu.agregarUsuario(usu, 0);
+
+            }catch(Exception e){
+                response.sendError(502,"Error MYSQL "+e.getMessage());
+                return;
+            }
+            if(agregarUsuario > 0){
+                request.setAttribute("Mensaje", "Usuario registrado");
+                request.getRequestDispatcher("/public/201.jsp").forward(request, response);
+            }else{
+                response.sendError(502,"No rows afected");
             }
         }
     }
 
-}

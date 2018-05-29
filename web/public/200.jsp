@@ -12,13 +12,10 @@
         <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/skeleton.css">
-        <title>401</title>
+        <title>200</title>
         <style>
-            *{
-                margin: auto;
-            }
             body{
-                background: #ff6666;
+                background: #3399ff;
                 color: white;
                 padding: 5rem;
                 overflow-y: hidden;
@@ -28,14 +25,18 @@
     </head>
     <body>
         <h1>
-            <b>401</b> ¡Ey! ¿Que intentas hacer?
+            200
         </h1>
         <br>
+        <h2>
+            OK
+        </h2>
+        <br>
         <h3>
-            <%= (String) request.getAttribute("Mensaje") %>
+            <%= request.getAttribute("Mensaje") %>
         </h3>
         <br>
-        <img src="img/401.gif">
+        <img src="img/200.gif">
         <br>
         <button onclick="history.back(1)" class="button">Volver</button>
     </body>

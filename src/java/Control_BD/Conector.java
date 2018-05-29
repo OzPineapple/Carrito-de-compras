@@ -42,7 +42,7 @@ public class Conector implements DataType{
      * Imprime el error en consola
      * @param e 
      */
-    private void printErr(Exception e){
+    protected void printErr(Exception e){
         System.out.println("E R R O R :"+e.getMessage());
         StackTraceElement[] errores = e.getStackTrace();
         for(StackTraceElement err : errores){
@@ -54,7 +54,7 @@ public class Conector implements DataType{
      * Se conecta a la base de datos de MYSQL
      * @return Connection Objeto de conexion MYSQL 
      */
-    private Connection getConnection(){
+    protected Connection getConnection(){
         Connection con = null;
         try{
             Class.forName(driver);
@@ -64,64 +64,19 @@ public class Conector implements DataType{
         }
         return con;
     }
-    
-    /**
-     * Hace una consulta a la base de datos atravez de una sentencia SQL
-     * @param sql
-     * @return ResultSet Resultado
-     */
-    protected ResultSet Query(String sql, String[] datos, int[] dataType){
-        try(Connection con = this.getConnection();
-            PreparedStatement ps=con.prepareStatement(sql)){
-            this.insertData(ps, datos, dataType);
-            return ps.executeQuery();
-        }catch(Exception e){
-            this.printErr(e);
-            return null;
-        }
-    }
     /**
      * Actuliza  la base de datos atrvez de una base de datos a travez de una
      * sentencia SQL
      * @param sql
      * @return 
      */
-    protected int Update(String sql, String[] datos, int[] dataType){
+    protected int Update(String sql){
         try(Connection con = this.getConnection();
             PreparedStatement ps=con.prepareStatement(sql)){
-            this.insertData(ps, datos, dataType);
             return ps.executeUpdate();
         }catch(Exception e){
             this.printErr(e);
             return -1;
-        }
-    }
-    /**
-     * Inserta los datos en el PS para ahorrar lineas
-     * @param ps
-     * @param datos
-     * @param dataType
-     * @throws SQLException 
-     */
-    private void insertData(PreparedStatement ps, String[] datos, int[] dataType) throws SQLException{
-        for (int i = 0; i < datos.length; i++) {
-            switch(dataType[i]){
-                case DataString:
-                    ps.setString(i, datos[i]);
-                break;
-                case DataInt:
-                    ps.setInt(i, Integer.parseInt(datos[i]));
-                break;
-                case DataDouble:
-                    ps.setDouble(i, Double.parseDouble(datos[i]));
-                break;
-                case DataFloat:
-                    ps.setFloat(i, Float.parseFloat(datos[i]));
-                break;
-                case DataDate:
-                    ps.setDate(i, Date.valueOf(datos[i]));
-                break;
-            }
         }
     }
     //</editor-fold>    
