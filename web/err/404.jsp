@@ -28,12 +28,8 @@
     </head>
     <body>
         <h1>
-            404
+            <b>404</b> La pagina que buscas no existe
         </h1>
-        <br>
-        <h2>
-            La pagina que buscas no existe
-        </h2>
         <br>
         <img src="img/404.gif">
         <br>

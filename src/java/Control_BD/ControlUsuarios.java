@@ -18,7 +18,11 @@ import java.sql.SQLException;
 public class ControlUsuarios extends Conector{
     
     public int agregarUsuario(Usuario usu, int rango){
-        return this.Update("CALL anadirUsuario('"+usu.getNombre()+"','"+usu.getContraseña()+"',"+rango+");");
+        int i = this.Update("CALL anadirUsuario('"+usu.getNombre()+"','"+usu.getContraseña()+"',"+rango+");");
+        if(i == -1){
+            throw new RuntimeException("Ese usuario ya existe");
+        }
+        return i;
     }
     
     public int eleminarUsuario(Usuario usu){
@@ -30,9 +34,14 @@ public class ControlUsuarios extends Conector{
     }    
 
     public Usuario getUsuarioSesion(Usuario usu) throws SQLException{
-        Connection con = this.getConnection();
-        PreparedStatement ps = con.prepareStatement("CALL getUsuarioSesion('"+usu.getNombre()+"','"+usu.getContraseña()+"');");
-        ResultSet rs = ps.executeQuery();
+        ResultSet rs = null;
+        try{
+            Connection con = this.getConnection();
+            PreparedStatement ps = con.prepareStatement("CALL getUsuarioSesion('"+usu.getNombre()+"','"+usu.getContraseña()+"');");
+            rs = ps.executeQuery();
+        }catch(Exception e){
+            this.printErr(e);
+        }
         
         if(rs.next()){
             if (rs.getString("Contrasena").equals(usu.getContraseña())) {

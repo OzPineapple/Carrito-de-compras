@@ -75,7 +75,8 @@ public class Registrar extends HttpServlet {
                 agregarUsuario = cu.agregarUsuario(usu, 0);
 
             }catch(Exception e){
-                response.sendError(502,"Error MYSQL "+e.getMessage());
+                request.setAttribute("Mensaje", e.getMessage());
+                request.getRequestDispatcher("/err/401.jsp").forward(request, response);
                 return;
             }
             if(agregarUsuario > 0){

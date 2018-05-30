@@ -58,7 +58,7 @@
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
                             minlength="8" maxlength="30" name="contraIn" required
-                            pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
+                            pattern="[0-9A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
             </div>
             <br>
@@ -81,7 +81,7 @@
                         <label>Contraseña:</label>
                         <input type="password" title="Solo caracteres alfanumericos"
                             minlength="8" maxlength="30" name="contraNew" required
-                            pattern="[A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
+                            pattern="[0-9A-Za-zÁÉÚÍÓáéúíóÄËÏÜÖäëüïö\s]+">
                 </div>
             </div>
             <br>

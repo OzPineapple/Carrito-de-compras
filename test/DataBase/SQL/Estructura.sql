@@ -9,7 +9,8 @@ CREATE TABLE Usuario(
     Nombre varchar(30) not null,
     Contrasena varchar(30) not null,
     Rango int not null,
-    PRIMARY KEY(id_usu)
+    PRIMARY KEY(id_usu),
+    UNIQUE (Nombre)
 );
 
 CREATE TABLE Producto(

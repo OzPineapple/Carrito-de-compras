@@ -25,16 +25,8 @@
     </head>
     <body>
         <h1>
-            200
+            <b>200</b> <%= request.getAttribute("Mensaje") %>
         </h1>
-        <br>
-        <h2>
-            OK
-        </h2>
-        <br>
-        <h3>
-            <%= request.getAttribute("Mensaje") %>
-        </h3>
         <br>
         <img src="img/200.gif">
         <br>
