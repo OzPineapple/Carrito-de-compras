@@ -4,10 +4,30 @@
         <servlet-name>IniciarSesion</servlet-name>
         <servlet-class>Control_Seciones.IniciarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Registrar</servlet-name>
+        <servlet-class>Control_Seciones.Registrar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Registrar</servlet-name>
+        <url-pattern>/Registrar</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/err/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/err/401.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>502</error-code>
+        <location>/err/502.jsp</location>
+    </error-page>
     <session-config>
         <session-timeout>
             30

@@ -6,28 +6,31 @@
 package Control_BD;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
  * @author Zush18
  */
-public class Conector {
+public class Conector implements DataType{
+
     //<editor-fold desc="Credenciales">
     /**
      * Usuario de la base de datos
      */
-    String username = "root";
+    String username = "CajeroDeepWeb";
     /**
      * Contrasaña para conectar
      */
-    String password = "n0m3l0";
+    String password = "d33pw33b";
     /**
      * Ruta de la base de datos
      */
-    String url = "jdbc:mysql:3306//localhost/proyecto";
+    String url = "jdbc:mysql://localhost:3306/TiendaDeepWeb";
     /**
      * Driver de MYSQL para conectar
      */
@@ -39,7 +42,7 @@ public class Conector {
      * Imprime el error en consola
      * @param e 
      */
-    private void printErr(Exception e){
+    protected void printErr(Exception e){
         System.out.println("E R R O R :"+e.getMessage());
         StackTraceElement[] errores = e.getStackTrace();
         for(StackTraceElement err : errores){
@@ -51,28 +54,15 @@ public class Conector {
      * Se conecta a la base de datos de MYSQL
      * @return Connection Objeto de conexion MYSQL 
      */
-    private Connection getConnection(){
-        
-        Connection con=null;
-        
+    protected Connection getConnection(){
+        Connection con = null;
         try{
             Class.forName(driver);
-            url="jdbc:mysql://localhost/proyecto";
             con=DriverManager.getConnection(url, username, password);
-            
-            System.out.println("Si se conecto a la BD");
         }catch(Exception e){
             this.printErr(e);
         }
         return con;
-    }
-    /**
-     * Hace una consulta a la base de datos atravez de una sentencia SQL
-     * @param sql
-     * @return ResultSet Resultado
-     */
-    private ResultSet Query(String sql){
-        throw new UnsupportedOperationException("Sin base de datos para poder programar este codigo"); 
     }
     /**
      * Actuliza  la base de datos atrvez de una base de datos a travez de una
@@ -80,10 +70,16 @@ public class Conector {
      * @param sql
      * @return 
      */
-    private int Update(String sql){
-        throw new UnsupportedOperationException("Sin base de datos para poder programar este codigo"); 
+    protected int Update(String sql){
+        try(Connection con = this.getConnection();
+            PreparedStatement ps=con.prepareStatement(sql)){
+            return ps.executeUpdate();
+        }catch(Exception e){
+            this.printErr(e);
+            return -1;
+        }
     }
-    //</editor-fold>
-    
-    
+    //</editor-fold>    
+
 }
+

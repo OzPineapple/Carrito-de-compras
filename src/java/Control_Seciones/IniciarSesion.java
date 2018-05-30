@@ -5,9 +5,11 @@
  */
 package Control_Seciones;
 
+import Control_BD.ControlUsuarios;
 import Control_validaciones.Checador;
+import Entidades.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -28,37 +30,42 @@ public class IniciarSesion extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException {        
         String usuario = null;
         String contraseña = null;
         try{
-            usuario =  request.getParameter("usuario");
-            contraseña = request.getParameter("contra");
+            usuario =  request.getParameter("usuarioIn");
+            contraseña = request.getParameter("contraIn");
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
         Checador validar =  new Checador();
-        
-        try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet NewServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            if(validar.usuario(usuario)){
-                out.println("<h1>Usuario "+validar.getMensaje()+"</h1>");
-            }
-            if(validar.contraseña(contraseña)){
-                out.println("<h1>Contraseña "+validar.getMensaje()+"</h1>");
-            }
-            if(!validar.usuario(usuario) && !validar.contraseña(contraseña)){
-                out.println("<h1>Campos validos</h1>");
-            }
-            out.println("</body>");
-            out.println("</html>");
-
+        ControlUsuarios cu = new ControlUsuarios();
+        Usuario usu = new Usuario(usuario, contraseña);
+        if(validar.usuario(usuario)){
+            request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
         }
+        if(validar.contraseña(contraseña)){
+            request.setAttribute("Mensaje", "Usuario "+validar.getMensaje());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
+        }
+        
+        try {
+            usu = cu.getUsuarioSesion(usu);
+        } catch (SQLException e) {
+            response.sendError(502, "MYSQL error revisar consola "+e.getMessage());
+            return;
+        } catch(RuntimeException e){
+            System.out.println(e.getMessage());
+            request.setAttribute("Mensaje", e.getMessage());
+            request.getRequestDispatcher("err/401.jsp").forward(request, response);
+            return;
+        }
+        request.setAttribute("Mensaje", "Todo ok"+usu.getNombre()+usu.getContraseña());
+        request.getRequestDispatcher("public/200.jsp").forward(request, response);
 
     }
 }
