@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class Portero {
 
     public Portero(HttpServletRequest request, HttpServletResponse response, int rango) throws IOException {
-        try{
+        try{    
             Usuario usu = (Usuario) request.getAttribute("usuario");
             if(usu == null){
                 response.sendRedirect("index.jsp");
