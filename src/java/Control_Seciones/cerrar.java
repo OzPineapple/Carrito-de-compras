@@ -31,6 +31,7 @@ public class cerrar extends HttpServlet {
             throws ServletException, IOException {
         request.getSession().invalidate();
         response.sendRedirect("/Carrito-de-compras/index.jsp");
+        
     }
 
 }
