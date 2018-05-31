@@ -22,7 +22,9 @@ DROP PROCEDURE IF EXISTS eleminarUsuario;
 
 CREATE PROCEDURE eleminarUsuario(IN idIn int)
     BEGIN
-        DELETE FROM Usuario WHERE id_usu=idIn;
+        IF idIn != 1 THEN
+            DELETE FROM Usuario WHERE id_usu=idIn;
+        END IF
     END 
 //
 DELIMITER //

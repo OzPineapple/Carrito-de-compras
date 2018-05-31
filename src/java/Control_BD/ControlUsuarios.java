@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -53,4 +54,22 @@ public class ControlUsuarios extends Conector{
             throw new RuntimeException("No existe ese usuario");
         }
     }    
+    public ArrayList<Usuario> getAllUsuarios(){
+        ResultSet rs = null;
+        ArrayList<Usuario> usu = new ArrayList();
+        try{
+            Connection con = this.getConnection();
+            PreparedStatement ps = con.prepareStatement("CALL getAllUsuario();");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                usu.add(new Usuario(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4)));
+            }
+        }catch(Exception e){
+            this.printErr(e);
+        }
+        if(rs == null || usu.isEmpty()){
+            throw new RuntimeException("No hay registros . . . espera khe? :v");
+        }
+        return usu;
+    }
 }

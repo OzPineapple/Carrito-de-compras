@@ -8,6 +8,10 @@
         <servlet-name>Registrar</servlet-name>
         <servlet-class>Control_Seciones.Registrar</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cerrar</servlet-name>
+        <servlet-class>Control_Seciones.cerrar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>IniciarSesion</servlet-name>
         <url-pattern>/IniciarSesion</url-pattern>
@@ -25,9 +29,29 @@
         <location>/err/401.jsp</location>
     </error-page>
     <error-page>
+        <error-code>403</error-code>
+        <location>/err/403.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>405</error-code>
+        <location>/err/405.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>418</error-code>
+        <location>/err/418.jsp</location>
+    </error-page>
+    <error-page>
         <error-code>502</error-code>
         <location>/err/502.jsp</location>
     </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/err/500.jsp</location>
+    </error-page>
+    <servlet-mapping>
+        <servlet-name>cerrar</servlet-name>
+        <url-pattern>/cerrar</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

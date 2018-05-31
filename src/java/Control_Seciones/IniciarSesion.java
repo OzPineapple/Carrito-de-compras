@@ -64,8 +64,8 @@ public class IniciarSesion extends HttpServlet {
             request.getRequestDispatcher("err/401.jsp").forward(request, response);
             return;
         }
-        request.setAttribute("Mensaje", "Todo ok"+usu.getNombre()+usu.getContraseña());
-        request.getRequestDispatcher("public/200.jsp").forward(request, response);
+        request.setAttribute("usuario", usu);
+        request.getRequestDispatcher("public/inicio.jsp").forward(request, response);
 
     }
 }
