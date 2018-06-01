@@ -10,25 +10,17 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/skeleton.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/normalize.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/skeleton.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/err.css"/>
         <title>201</title>
-        <style>
-            body{
-                background: #3399ff;
-                color: white;
-                padding: 5rem;
-                overflow-y: hidden;
-                overflow-x: hidden;
-            }
-        </style>
     </head>
-    <body>
+    <body style="background: #3399ff;">
         <h1>
-            <b>201</b> <%= request.getAttribute("Mensaje") %>
+            <b>201</b> <%= (request.getAttribute("Mensaje")==null)? "":request.getAttribute("Mensaje") %>
         </h1>
         <br>
-        <img src="img/201.gif">
+        <img src="/Carrito-de-compras/img/201.gif">
         <br>
         <button onclick="history.back(1)" class="button">Volver</button>
     </body>

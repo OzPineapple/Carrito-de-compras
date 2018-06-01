@@ -6,17 +6,14 @@
 package Control_BD;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Provee de todos los metodos necesarios para extraer datos de MYSQL.
  * @author Zush18
  */
-public class Conector implements DataType{
+public class Conector{
 
     //<editor-fold desc="Credenciales">
     /**

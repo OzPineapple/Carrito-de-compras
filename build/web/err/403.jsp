@@ -13,23 +13,20 @@
         <link rel="stylesheet" href="/Carrito-de-compras/css/normalize.css">
         <link rel="stylesheet" href="/Carrito-de-compras/css/skeleton.css">
         <link rel="stylesheet" href="/Carrito-de-compras/css/err.css"/>
-        <title>502</title>
+        <title>403</title>
     </head>
-    <body>
+    <body class="403">
         <h1>
-            502
+            <b>403</b> ¡WOW WOW! ¿Quien eres tú?
         </h1>
-        <br>
-        <h2>
-            Alguien hizo algo mal . . .
-        </h2>
         <br>
         <h3>
             <%= (request.getAttribute("Mensaje")==null)? "":request.getAttribute("Mensaje") %>
         </h3>
         <br>
-        <img src="/Carrito-de-compras/img/502.gif">
+        <img src="/Carrito-de-compras/img/403.gif">
         <br>
         <button onclick="history.back(1)" class="button">Volver</button>
     </body>
 </html>
+

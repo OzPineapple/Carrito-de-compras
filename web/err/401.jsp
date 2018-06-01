@@ -10,21 +10,10 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/skeleton.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/normalize.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/skeleton.css">
+        <link rel="stylesheet" href="/Carrito-de-compras/css/err.css"/>
         <title>401</title>
-        <style>
-            *{
-                margin: auto;
-            }
-            body{
-                background: #ff6666;
-                color: white;
-                padding: 5rem;
-                overflow-y: hidden;
-                overflow-x: hidden;
-            }
-        </style>
     </head>
     <body>
         <h1>
@@ -32,10 +21,10 @@
         </h1>
         <br>
         <h3>
-            <%= (String) request.getAttribute("Mensaje") %>
+<%= (request.getAttribute("Mensaje")==null)? "":request.getAttribute("Mensaje") %>
         </h3>
         <br>
-        <img src="img/401.gif">
+        <img src="/Carrito-de-compras/img/401.gif">
         <br>
         <button onclick="history.back(1)" class="button">Volver</button>
     </body>
